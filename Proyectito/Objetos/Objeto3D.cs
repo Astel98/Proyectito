@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyectito
 {
-    internal class Objeto3D
+    internal class Objeto3D : IDibujable
     {
 
         public Dictionary<string, Objeto2D> listaDeCaras { get; set; }
@@ -75,6 +75,37 @@ namespace Proyectito
             return this.listaDeCaras;
         }
 
+        public void RotarE(float x, float y, float z, Punto centro)
+        {
+            foreach (var face in this.listaDeCaras)
+            {
+                face.Value.RotarE(x, y, z, centroCopia);
+            }
+            x = MathHelper.DegreesToRadians(x);
+            y = MathHelper.DegreesToRadians(y);
+            z = MathHelper.DegreesToRadians(z);
+            Matrix3 matrizRotacion = Matrix3.CreateRotationX(x) * Matrix3.CreateRotationY(y) * Matrix3.CreateRotationZ(z);
+            centroCopia = centroCopia * matrizRotacion;
+        }
+
+        public void EscalarE(float x, float y, float z, Punto centro)
+        {
+            foreach (var face in this.listaDeCaras)
+            {
+                face.Value.EscaladoE(x, y, z, centroCopia);
+            }
+            centroCopia = centroCopia * Matrix3.CreateScale(x, y, z);
+        }
+
+        public void Trasladar(float x, float y, float z)
+        {
+            foreach (var face in this.listaDeCaras)
+            {
+                face.Value.Trasladar(x, y, z);
+            }
+            centroCopia = centroCopia + new Punto(x, y, z);
+        }
+
         public void Limpiar()
         {
             foreach (var cara in listaDeCaras)
@@ -84,5 +115,14 @@ namespace Proyectito
             this.centroCopia = this.centroLimpiar;
         }
 
+        public void Rotar(float x, float y, float z)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Escalar(float x, float y, float z)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

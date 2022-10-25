@@ -86,6 +86,10 @@
   <ItemGroup>
     <Compile Include="Escenario\Escenario.cs" />
     <Compile Include="Escenario\Juego.cs" />
+    <Compile Include="Helpers\Accion.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\Guion.cs" />
+    <Compile Include="Helpers\IDibujable.cs" />
     <Compile Include="Helpers\JsonBro.cs" />
     <Compile Include="Objetos\Objeto2D.cs" />
     <Compile Include="Objetos\Objeto3D.cs" />

@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Proyectito
 {
-    internal class Objeto2D
+    internal class Objeto2D :IDibujable
     {
 
         public Dictionary<string, Punto> listaDeVertices { get; set; }
@@ -21,6 +21,9 @@ namespace Proyectito
         public Punto centroTransformar { get; set; }
         public Punto centroLimpiar { get; set; }
         public Punto centroLimpiar2 { get; set; }
+
+        public Matrix3 matrizRotacion = Matrix3.Identity;
+        public Matrix3 matrizEscalado = Matrix3.Identity;
 
         public Objeto2D()
         {
@@ -68,8 +71,8 @@ namespace Proyectito
             GL.Begin(PrimitiveType.Polygon);
             foreach (var vertice in listaDeVertices)
             {
-                Punto vectorADibujar = (vertice.Value + centroTransformar);
-                vectorADibujar -= centroTransformar;
+                Punto vectorADibujar = (vertice.Value + centroTransformar) * matrizRotacion * matrizEscalado;
+                vectorADibujar -= (centroTransformar * matrizRotacion * matrizEscalado);
                 vertice.Value.x = vectorADibujar.x;
                 vertice.Value.y = vectorADibujar.y;
                 vertice.Value.z = vectorADibujar.z;
@@ -78,6 +81,41 @@ namespace Proyectito
             }
             GL.End();
             this.centroTransformar = new Punto(0, 0, 0);
+            matrizRotacion = Matrix3.Identity;
+            matrizEscalado = Matrix3.Identity;
+        }
+
+        public void Rotar(float anguloX, float anguloY, float anguloZ)
+        {
+
+            anguloX = MathHelper.DegreesToRadians(anguloX);
+            anguloY = MathHelper.DegreesToRadians(anguloY);
+            anguloZ = MathHelper.DegreesToRadians(anguloZ);
+            matrizRotacion = Matrix3.CreateRotationX(anguloX) * Matrix3.CreateRotationY(anguloY) * Matrix3.CreateRotationZ(anguloZ);
+        }
+
+        public void RotarE(float anguloX, float anguloY, float anguloZ, Punto centro)
+        {
+            Rotar(anguloX, anguloY, anguloZ);
+            this.centroTransformar = centro + this.centroCaraCopia;
+            this.centro = this.centro - centroTransformar;
+            this.centroCaraCopia = (centroCaraCopia + centro) * matrizRotacion;
+            this.centroCaraCopia = centroCaraCopia - centro * matrizRotacion;
+            this.centro = this.centro + centroCaraCopia + centro * matrizRotacion;
+        }
+
+        public void EscaladoE(float x, float y, float z, Punto centro)
+        {
+            matrizEscalado = Matrix3.CreateScale(x, y, z);
+            this.centro = this.centro - centroCaraCopia - centro;
+            this.centroTransformar = centroCaraCopia + centro;
+            centroCaraCopia = ((centroCaraCopia + centro) * matrizEscalado) - (centro * matrizEscalado);
+            this.centro = this.centro + centroCaraCopia + (centro * matrizEscalado);
+        }
+
+        public void Trasladar(float x, float y, float z)
+        {
+            traslacion += new Punto(x, y, z);
         }
 
         public void Limpiar()
@@ -92,5 +130,9 @@ namespace Proyectito
             traslacion = new Punto(0, 0, 0);
         }
 
+        public void Escalar(float x, float y, float z)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

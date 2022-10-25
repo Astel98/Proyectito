@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.glControl1 = new OpenTK.GLControl();
             this.SuspendLayout();
+            // 
+            // glControl1
+            // 
+            this.glControl1.BackColor = System.Drawing.Color.Black;
+            this.glControl1.Location = new System.Drawing.Point(12, 12);
+            this.glControl1.Name = "glControl1";
+            this.glControl1.Size = new System.Drawing.Size(395, 395);
+            this.glControl1.TabIndex = 0;
+            this.glControl1.VSync = false;
+            this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 419);
+            this.Controls.Add(this.glControl1);
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -43,5 +55,7 @@
         }
 
         #endregion
+
+        private OpenTK.GLControl glControl1;
     }
 }

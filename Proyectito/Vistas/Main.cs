@@ -22,5 +22,10 @@ namespace Proyectito.Vistas
         {
 
         }
+
+        private void glControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

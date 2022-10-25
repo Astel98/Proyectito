@@ -7,13 +7,14 @@ using OpenTK;
 
 namespace Proyectito
 {
-    class Escenario
+    class Escenario : IDibujable
     {
 
         public Punto centro { get; set; }
         public Punto centroAux { get; set; }
         public Punto centroLimpiar { get; set; }
         public Dictionary<string, Objeto3D> listaObjetos { get; set; }
+        public Guion guioncito { get; set; }
 
         public Escenario()
         {
@@ -70,6 +71,30 @@ namespace Proyectito
                 obj.Value.Dibujar();
             }
 
+        }
+
+        public void Rotar(float x, float y, float z)
+        {
+            foreach (var objeto3D in listaObjetos)
+            {
+                objeto3D.Value.RotarE(x, y, z, centroAux);
+            }
+        }
+
+        public void Escalar(float x, float y, float z)
+        {
+            foreach (var objeto3D in listaObjetos)
+            {
+                objeto3D.Value.EscalarE(x, y, z, centroAux);
+            }
+        }
+
+        public void Trasladar(float x, float y, float z)
+        {
+            foreach (var objeto3D in listaObjetos)
+            {
+                objeto3D.Value.Trasladar(x, y, z);
+            }
         }
 
 

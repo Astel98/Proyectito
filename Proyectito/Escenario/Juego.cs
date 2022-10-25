@@ -34,8 +34,8 @@ namespace Proyectito
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            //CrearEscena();
-            this.escenario = JsonBro.Deserializador(File.ReadAllText(AbrirJson()));
+            CrearEscena();
+            //this.escenario = JsonBro.Deserializador(File.ReadAllText(AbrirJson()));
             GL.ClearColor(Color4.SkyBlue);
             GL.MatrixMode(MatrixMode.Projection);
             GL.Frustum(-10, 10, -10, 10, 5, 30);
@@ -49,6 +49,36 @@ namespace Proyectito
             base.OnUpdateFrame(e);
         }
 
+        protected override void OnKeyPress(OpenTK.KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'w')
+            {
+                this.escenario.Escalar(1.1f, 1.1f, 1.1f);
+            }
+            if (e.KeyChar == 's')
+            {
+                this.escenario.Escalar(1 / 1.1f, 1 / 1.1f, 1 / 1.1f);
+            }
+            if (e.KeyChar == 'a')
+            {
+                this.escenario.Rotar(0, 1, 0);
+            }
+            if (e.KeyChar == 'd')
+            {
+                this.escenario.Rotar(0, -1, 0);
+            }
+            if (e.KeyChar == 'q')
+            {
+                this.escenario.Trasladar(0, 0.1f, 0);
+            }
+            if (e.KeyChar == 'e')
+            {
+                this.escenario.Trasladar(0, -0.1f, 0);
+            }
+
+            base.OnKeyPress(e);
+        }
+
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.Enable(EnableCap.DepthTest);
@@ -58,11 +88,13 @@ namespace Proyectito
             SwapBuffers();
             base.OnRenderFrame(e);
         }
+
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
             base.OnResize(e);
         }
+
 
 
         //Funciones personalizadas
