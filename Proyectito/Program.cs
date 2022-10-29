@@ -14,10 +14,13 @@ namespace Proyectito
         static void Main(string[] args)
         {
             Thread t = new Thread((ThreadStart)(() => {
-                using (var juego = new Juego(700, 600, ":D"))
-                {
-                    juego.Run();
-                }
+                //using (var juego = new Juego(700, 600, ":D"))
+                //{
+                //    juego.Run();
+                //}
+
+                UI juegazo = new UI();
+                juegazo.ShowDialog();
             }));
 
             t.SetApartmentState(ApartmentState.STA);

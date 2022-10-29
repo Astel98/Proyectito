@@ -10,10 +10,10 @@ namespace Proyectito
     {
         
 
-        TipoAc accion { set; get; }
-        float ejeX { set; get; }
-        float ejeY { set; get; }
-        float ejeZ { set; get; }
+        public TipoAc accion { set; get; }
+        public float ejeX { set; get; }
+        public float ejeY { set; get; }
+        public float ejeZ { set; get; }
 
         public Accion()
         {

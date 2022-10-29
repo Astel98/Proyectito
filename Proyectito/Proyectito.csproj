@@ -53,8 +53,8 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -87,6 +87,7 @@
     <Compile Include="Escenario\Escenario.cs" />
     <Compile Include="Escenario\Juego.cs" />
     <Compile Include="Helpers\Accion.cs" />
+    <Compile Include="Helpers\Creador.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\Guion.cs" />
     <Compile Include="Helpers\IDibujable.cs" />
@@ -96,21 +97,23 @@
     <Compile Include="Objetos\Punto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vistas\Main.cs">
+    <Compile Include="Vistas\UI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="Vistas\UI.Designer.cs">
+      <DependentUpon>UI.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Escenario.datasource" />
+    <None Include="Properties\DataSources\Objeto3D.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Vistas\Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\UI.resx">
+      <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,11 +9,15 @@ namespace Proyectito
     public class Guion
     {
 
-        Dictionary<string, Accion> listaAcciones { get; set; }
+        public Dictionary<string, Accion> listaAcciones { get; set; }
 
         public Guion()
         {
             this.listaAcciones = new Dictionary<string, Accion>();
+        }
+        public Guion(Dictionary<string, Accion> guioncillo)
+        {
+            this.listaAcciones = guioncillo;
         }
 
         public void AddAccion(TipoAc accion, float x, float y, float z)
